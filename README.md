@@ -9,6 +9,8 @@ Every script aims to be highly single responsible and independent in design. By 
 * ...reference each other. They can be selectively installed in a project without the need to consider missing dependencies. 
 * ...depend on anything outside the core features of Unity. They should be compatible with most recent versions of Unity, if not some of its older versions for the more basic scripts.
 
+See [Wiki](https://github.com/Smidgens/Unity-Snippet-Scripts/wiki) for docs.
+
 ## Examples
 
 | On Unity Event |

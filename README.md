@@ -1,19 +1,16 @@
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/Smidgens/UnityQuickBuild/master/LICENSE.md)
+# Unity Snippets
 
-# Unity Snippet Scripts
+A collection of modular snippet scripts for Unity. Each script handles some specifc task and is designed to be chained together or combined with your own game scripts directly in Unity's inspector in a manner similar to built-in Unity components, allowing you to quickly wire together more complex behaviours outside of code.
 
-A collection of standalone utility scripts aimed to make it easy to quickly chain together functionality and alleviate the need to implement basic functionality such as timed waiting or scene loading.
+Using these scripts you can skip a lot of common boilerplate logic (listening to collisions, input, timed function calls etc.) and instead focus on features specific to your game. You can also easily replace these scripts later as you see fit (as would be advisable anyway post-prototype stage).
 
-Every script aims to be highly single responsible and independent in design. By this principle, they don't:
-* ...implement any of Unity's script events such as "Update" or "Awake". Their functions need to called manually (linked in the inspector ideally, though still callable through code).
-* ...reference each other. They can be selectively installed in a project without the need to consider missing dependencies. 
-* ...depend on anything outside the core features of Unity. They should be compatible with most recent versions of Unity, if not some of its older versions for the more basic scripts.
+---
 
-See [Wiki](https://github.com/Smidgens/Unity-Snippet-Scripts/wiki) for docs.
+For a full list of available scripts, see [script folder](https://github.com/Smidgens/unitysnippets/tree/master/Assets/SnippetScripts/Scripts).
 
-## Examples
+---
 
-| On Unity Event |
-| ------------- |
-| Executes on the specified script event; can be combined with other scripts through the editor. |
-| ![Unity Event](/Screenshots/01.png?raw=true "Unity Event") ![Unity Event](/Screenshots/02.png?raw=true "Unity Event") |
+
+**Notes**:
+
+* If you're using optimizations like code stripping, you'll want to utilize Unity's [Preserve](https://docs.unity3d.com/ScriptReference/Scripting.PreserveAttribute.html) attribute to make sure that methods or properties you've bound in the inspector don't get removed in the build, as the generics are largely Reflection based ([UnityEvent](https://docs.unity3d.com/Manual/UnityEvents.html)).

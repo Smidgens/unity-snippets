@@ -6,7 +6,7 @@ Using these scripts you can skip a lot of common boilerplate logic (listening to
 
 ---
 
-For a full list of available scripts, see [script folder](https://github.com/Smidgens/unitysnippets/tree/master/Assets/SnippetScripts/Scripts).
+For a full list of available scripts, see [script folder](https://github.com/Smidgens/unitysnippets/tree/master/Assets/unity-snippets/Scripts).
 
 ---
 

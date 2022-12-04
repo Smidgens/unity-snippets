@@ -1,0 +1,21 @@
+{
+	"name":"com.smidgenomics.unity-snippets",
+	"version":"0.1.0",
+	"displayName":"Snippets",
+	"description":"Modular snippet scripts for Unity",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Smidgens/unity-snippets.git"
+	},
+	"author":{
+		"name":"Unnar Krist",
+		"url":"https://github.com/Smidgens"
+	},
+	"keywords":[
+		"unity-snippets",
+		"smidgenomics",
+		"utilities",
+		"snippets",
+		"scripts"
+	]
+}

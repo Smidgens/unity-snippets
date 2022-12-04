@@ -1,0 +1,14 @@
+{
+    "name": "Smidgenomics.Unity.Snippets",
+    "rootNamespace": "Smidgenomics.Unity.Snippets",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

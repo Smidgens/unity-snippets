@@ -1,1 +1,1 @@
-<img src="https://raw.githubusercontent.com/Smidgenomics/unity.plugins/master/snippets/banner.png" width="100%"/>
+<img src="https://raw.githubusercontent.com/Smidgenomics/unity.plugins/master/scripts/banner.png" width="100%"/>

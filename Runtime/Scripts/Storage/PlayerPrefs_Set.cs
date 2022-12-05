@@ -33,7 +33,7 @@ namespace Smidgenomics.Unity.Snippets.Editor
 			nameof(PlayerPrefs_Set<float>._key),
 			null,
 		};
-		protected override string[] GetFieldNames() => _FNAMES;
+		protected override string[] GetFields() => _FNAMES;
 	}
 }
 

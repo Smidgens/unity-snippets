@@ -5,7 +5,7 @@ namespace Smidgenomics.Unity.Snippets
 	using UnityEngine;
 	using UnityEngine.Events;
 
-	[AddComponentMenu(Constants.ACM.FLOW_CONDITIONAL + "Flip")]
+	[AddComponentMenu(Constants.ACM.FLOW_CONTROL + "Flip")]
 	internal sealed class Flip : MonoBehaviour
 	{
 		// invoke default

@@ -8,6 +8,7 @@ namespace Smidgenomics.Unity.Snippets
 	/// Draws gizmo cube in editor
 	/// </summary>
 	[AddComponentMenu(Constants.ACM.DEBUG_GIZMO + "Sphere")]
+	[UnityDocumentation("Gizmos")]
 	internal sealed class Gizmo_Sphere : Gizmos_Draw
 	{
 		protected override void DrawSolid() => Draw(Gizmos.DrawSphere);
@@ -44,7 +45,7 @@ namespace Smidgenomics.Unity.Snippets.Editor
 			null,
 			nameof(Gizmo_Sphere._radius),
 		};
-		protected override string[] GetFieldNames() => _FNAMES;
+		protected override string[] GetFields() => _FNAMES;
 	}
 }
 

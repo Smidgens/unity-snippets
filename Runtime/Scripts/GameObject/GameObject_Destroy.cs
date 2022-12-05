@@ -5,6 +5,7 @@ namespace Smidgenomics.Unity.Snippets
 	using UnityEngine;
 
 	[AddComponentMenu(Constants.ACM.GAMEOBJECT + "Destroy")]
+	[UnityDocumentation("Object.Destroy")]
 	internal class GameObject_Destroy : MonoBehaviour
 	{
 		public GameObject Object { get => _object; set => _object = value; }
@@ -35,7 +36,7 @@ namespace Smidgenomics.Unity.Snippets.Editor
 			nameof(GameObject_Instantiate._parent),
 		};
 
-		protected override string[] GetFieldNames() => _FNAMES;
+		protected override string[] GetFields() => _FNAMES;
 	}
 }
 

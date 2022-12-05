@@ -8,6 +8,7 @@ namespace Smidgenomics.Unity.Snippets
 	/// Prints messages to console, stripped in production
 	/// </summary>
 	[AddComponentMenu(Constants.ACM.DEBUG_PRINT + "Console")]
+	[UnityDocumentation("Debug.Log")]
 	internal sealed class Print_Console : MonoBehaviour
 	{
 		public void Log(object v) => Log<object>(v);
@@ -32,13 +33,12 @@ namespace Smidgenomics.Unity.Snippets.Editor
 
 	[CanEditMultipleObjects]
 	[CustomEditor(typeof(Print_Console))]
-	internal sealed class _Print : Editor
+	internal sealed class _Print : __BasicEditor
 	{
-		public override void OnInspectorGUI()
-		{
-			EditorGUILayout.HelpBox(_MSG, MessageType.Info);
-		}
-		private const string _MSG = "Logs debug text";
+		//protected override string GetMessageText()
+		//{
+		//	return "Logs debug text";
+		//}
 	}
 }
 #endif

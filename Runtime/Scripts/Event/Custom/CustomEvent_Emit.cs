@@ -28,7 +28,7 @@ namespace Smidgenomics.Unity.Snippets.Editor
 			null,
 		};
 
-		protected override string[] GetFieldNames() => _FNAMES;
+		protected override string[] GetFields() => _FNAMES;
 	}
 }
 

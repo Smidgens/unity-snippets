@@ -5,10 +5,10 @@ namespace Smidgenomics.Unity.Snippets
 
 	internal abstract class OnOutput<TOut> : MonoBehaviour
 	{
-		public void Input() => _onOutput.Invoke(Read());
-		protected abstract TOut Read();
+		public void Input() => _out.Invoke(Get());
+		protected abstract TOut Get();
 
-		[SerializeField] internal UnityEvent<TOut> _onOutput = null;
+		[SerializeField] internal UnityEvent<TOut> _out = null;
 	}
 }
 
@@ -21,22 +21,15 @@ namespace Smidgenomics.Unity.Snippets.Editor
 
 	[CanEditMultipleObjects]
 	[CustomEditor(typeof(OnOutput<>), true)]
-	internal sealed class _OnOutput : Editor
+	internal sealed class _OnOutput : __BasicEditor
 	{
-		public override void OnInspectorGUI()
+		private static readonly string[] _FNAMES =
 		{
-			serializedObject.UpdateIfRequiredOrScript();
-			EditorGUILayout.Space();
-			EditorGUILayout.PropertyField(_onOutput);
-			serializedObject.ApplyModifiedProperties();
-		}
+			nameof(OnOutput<float>._out),
+		};
 
-		private SerializedProperty _onOutput = null;
+		protected override string[] GetFields() => _FNAMES;
 
-		private void OnEnable()
-		{
-			_onOutput = serializedObject.FindProperty(nameof(OnOutput<float>._onOutput));
-		}
 	}
 }
 #endif

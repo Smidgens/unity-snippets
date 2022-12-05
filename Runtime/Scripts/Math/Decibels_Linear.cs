@@ -7,6 +7,6 @@ namespace Smidgenomics.Unity.Snippets
 	[AddComponentMenu(Constants.ACM.MATH_AUDIO + "Decibels → Linear")]
 	internal class Decibels_Linear : OnInputOutput<float, float>
 	{
-		protected override float Compute(in float v) => AudioMath.DecibelsToLinear(v);
+		protected override float In(in float v) => AudioMath.DecibelsToLinear(v);
 	}
 }

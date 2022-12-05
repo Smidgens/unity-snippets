@@ -5,18 +5,18 @@ namespace Smidgenomics.Unity.Snippets
 	using UnityEngine;
 	using UnityEngine.Events;
 
-	[AddComponentMenu(Constants.ACM.FLOW_CONDITIONAL + "Branch")]
+	[AddComponentMenu(Constants.ACM.FLOW_CONTROL + "Branch")]
 	internal sealed class Branch : MonoBehaviour
 	{
 		// invoke default
 		public void In(bool v)
 		{
-			UnityEvent e = v ? _onTrue : _onFalse;
+			UnityEvent e = v ? _true : _false;
 			e.Invoke();
 		}
 
-		[SerializeField] internal UnityEvent _onTrue = null;
-		[SerializeField] internal UnityEvent _onFalse = null;
+		[SerializeField] internal UnityEvent _true = null;
+		[SerializeField] internal UnityEvent _false = null;
 		
 	}
 }
@@ -43,8 +43,8 @@ namespace Smidgenomics.Unity.Snippets.Editor
 
 		private static readonly (string, string)[] _TABS =
 		{
-			("True", nameof(Branch._onTrue)),
-			("False", nameof(Branch._onTrue)),
+			("True", nameof(Branch._true)),
+			("False", nameof(Branch._false)),
 		};
 
 		private void OnEnable()

@@ -6,6 +6,7 @@ namespace Smidgenomics.Unity.Snippets
 
 	[DisallowMultipleComponent]
 	[AddComponentMenu(Constants.ACM.GAMEOBJECT + "Don't Destroy")]
+	[UnityDocumentation("Object.DontDestroyOnLoad")]
 	internal class GameObject_DontDestroy : MonoBehaviour
 	{
 		private void Awake() => DontDestroyOnLoad(gameObject);

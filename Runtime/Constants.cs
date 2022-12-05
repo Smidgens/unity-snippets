@@ -5,6 +5,20 @@ namespace Smidgenomics.Unity.Snippets
 	// magic constants, lt.dan
 	internal static class Constants
 	{
+		public static class Docs
+		{
+			public const string
+			URL_UNITY = "https://docs.unity3d.com/ScriptReference/{0}.html",
+			URL_WIKIPEDIA = "https://en.wikipedia.org/wiki/{0}",
+			URL_CSHARP = "https://learn.microsoft.com/en-us/dotnet/api/{0}";
+
+			public const string
+			LABEL_UNITY = "About @ Unity",
+			LABEL_WIKIPEDIA = "About @ Wikipedia",
+			LABEL_CSHARP = "About @ Microsoft";
+		}
+
+
 		// AddComponentMenu paths
 		public static class ACM
 		{
@@ -13,37 +27,38 @@ namespace Smidgenomics.Unity.Snippets
 			+ nameof(Snippets) + "/";
 
 			public const string
-			EVENT_SCRIPT = ROOT + "Event/Script/Script : ",
-			EVENT_APPLICATION = ROOT + "Event/Script/Application : ",
-			EVENT_SCENE = ROOT + "Event/Scene/Scene : ",
-			EVENT_TRIGGER = ROOT + "Event/Collider/Trigger/Collider : ",
-			EVENT_COLLISION = ROOT + "Event/Collider/Collision/Collider : ",
-			EVENT_UPDATE = ROOT + "Event/Update/Update : ",
-			EVENT_ANIMATOR = ROOT + "Event/Animator/Animator : ",
-			EVENT_RENDERER = ROOT + "Event/Renderer/Renderer : ",
-			EVENT_COLLIDER_MOUSE = ROOT + "Event/Collider/Mouse/Collider : ",
-			EVENT_TRANSFORM = ROOT + "Event/Transform/Transform : ",
-			EVENT_AUDIO = ROOT + "Event/Audio/Audio : ",
-			EVENT_INIT = ROOT + "Event/Init/Init : ",
-			EVENT_CLEANUP = ROOT + "Event/Cleanup/Cleanup : ",
-			EVENT_GIZMOS = ROOT + "Event/Gizmos/Gizmos : ",
-			EVENT_CUSTOM = ROOT + "Event/Custom/Custom Event : ",
-			EVENT_PHYSICS = ROOT + "Event/Physics/Physics : ",
-			EVENT = ROOT + "Event/";
+			VARIABLE = ROOT + "Variable/Variable : ";
+
+			public const string
+			EVENT_ROOT = ROOT + "Event/";
+
+			public const string
+			EVENT_ON_APPLICATION = EVENT_ROOT + "Application/Application : On Application ",
+			EVENT_ON_SCENE = EVENT_ROOT + "Scene Manager/Scene : ",
+			EVENT_ON_TRIGGER = EVENT_ROOT + "Collider/Trigger/Collider : On Trigger ",
+			EVENT_ON_COLLISION = EVENT_ROOT + "Collider/Collision/Collider : On Collision ",
+			EVENT_UPDATE = EVENT_ROOT + "Update/Update : ",
+			EVENT_ON_ANIMATOR = EVENT_ROOT + "Animator/Animator : ",
+			EVENT_ON_RENDERER = EVENT_ROOT + "Renderer/Renderer : ",
+			EVENT_ON_MOUSE = EVENT_ROOT + "Collider/Mouse/Collider : On Mouse ",
+			EVENT_ON_TRANSFORM = EVENT_ROOT + "Transform/Transform : On Transform ",
+			EVENT_AUDIO = EVENT_ROOT + "Audio/Audio : ",
+			EVENT_INIT = EVENT_ROOT + "Init/Init : ",
+			EVENT_CLEANUP = EVENT_ROOT + "Cleanup/Cleanup : ",
+			EVENT_ON_GIZMOS = EVENT_ROOT + "Gizmos/Gizmos : On Draw Gizmos",
+			EVENT_CUSTOM = EVENT_ROOT + "Custom/Custom Event : ",
+			EVENT_ON_PHYSICS = EVENT_ROOT + "Physics/Physics : ",
+			EVENT_ON_GUI = EVENT_ROOT + "IMGUI/IMGUI : ";
 
 			public const string
 			GAMEOBJECT = ROOT + "Game Object/Game Object : ";
 
-
-
 			public const string
 			TRANSFORM = ROOT + "Transform/Transform : ";
-
 
 			public const string
 			ANIMATION_SMR = ROOT + "Animation/Skinned Mesh/SMR : ",
 			ANIMATION = ROOT + "Animation/";
-
 
 			// value generators
 			public const string
@@ -88,7 +103,8 @@ namespace Smidgenomics.Unity.Snippets
 			public const string
 			FLOW_TIMING = ROOT + "Flow/Timing/Timing : ",
 			FLOW_CONDITIONAL = ROOT + "Flow/Conditional/Conditional : ",
-			FOR_EACH = ROOT + "Flow/For Each/For Each : ",
+			FOR_EACH = ROOT + "Flow/Loop/For Each : ",
+			FLOW_CONTROL = ROOT + "Flow/Control/Control : ",
 			FLOW = ROOT + "Flow/Flow : ";
 
 			// user store

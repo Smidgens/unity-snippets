@@ -10,9 +10,9 @@ namespace Smidgenomics.Unity.Snippets
 	internal sealed class Delay : MonoBehaviour
 	{
 		// invoke outside delay
-		public void Invoke(float delay) => InvokeDelay(delay);
+		public void In(float delay) => InvokeDelay(delay);
 
-		[SerializeField] internal UnityEvent _onExit = null;
+		[SerializeField] internal UnityEvent _out = null;
 
 		private void InvokeDelay(in float delay)
 		{
@@ -23,7 +23,27 @@ namespace Smidgenomics.Unity.Snippets
 		private IEnumerator InvokeRoutine(float t)
 		{
 			yield return new WaitForSeconds(t);
-			_onExit.Invoke();
+			_out.Invoke();
 		}
 	}
 }
+
+#if UNITY_EDITOR
+
+namespace Smidgenomics.Unity.Snippets.Editor
+{
+	using UnityEditor;
+
+	[CanEditMultipleObjects]
+	[CustomEditor(typeof(Delay))]
+	internal class _Delay : __BasicEditor
+	{
+		protected override string[] GetFields() => _FNAMES;
+
+		private static readonly string[] _FNAMES =
+		{
+			nameof(Delay._out)
+		};
+	}
+}
+#endif

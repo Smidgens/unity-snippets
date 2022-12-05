@@ -5,6 +5,7 @@
 namespace Smidgenomics.Unity.Snippets.Editor
 {
 	using UnityEditor;
+	using System.Linq;
 
 	/// <summary>
 	/// Base class to render default inspector
@@ -13,29 +14,38 @@ namespace Smidgenomics.Unity.Snippets.Editor
 	{
 		public override sealed void OnInspectorGUI()
 		{
+			_doc.DrawAvailable();
+
 			EditorGUILayout.Space();
 
+			serializedObject.UpdateIfRequiredOrScript();
+
 			DisplayMessage();
+			OnBeforeProps();
+			DrawDefaultProps();
+			OnAfterProps();
 
-			if(_props != null)
+			bool addSpace = _plist != null || _eventTabs != null;
+
+			if (addSpace)
 			{
-				serializedObject.UpdateIfRequiredOrScript();
-				foreach (SerializedProperty p in _props)
-				{
-					// treat null as request for space
-					if(p == null)
-					{
-						EditorGUILayout.Space();
-						continue;
-					}
-
-					EditorGUILayout.PropertyField(p);
-				}
-				serializedObject.ApplyModifiedProperties();
+				EditorGUILayout.Space();
 			}
+
+			_plist?.DoLayoutList();
+			_eventTabs?.DisplayLayout();
+
+			serializedObject.ApplyModifiedProperties();
 		}
 
-		protected virtual string[] GetFieldNames() => null;
+		protected virtual void OnBeforeProps() { }
+		protected virtual void OnAfterProps() { }
+		protected virtual string GetListField() => null;
+		protected virtual string[] GetFields() => null;
+
+		//protected virtual (string, string)[] GetEventFields() => null;
+		protected virtual string[] GetEventFields() => null;
+
 
 		protected virtual MessageType GetMessageType() => MessageType.Info;
 
@@ -45,9 +55,16 @@ namespace Smidgenomics.Unity.Snippets.Editor
 
 		private SerializedProperty[] _props = null;
 
+		private DocumentationLink _doc = null;
+
+		private TabbedEvents _eventTabs = null;
+
+		private PropList _plist = null;
+
 		private void OnEnable()
 		{
-			string[] fnames = GetFieldNames();
+			_doc = new DocumentationLink(target.GetType());
+			string[] fnames = GetFields();
 			if(fnames != null)
 			{
 				_props = new SerializedProperty[fnames.Length];
@@ -57,7 +74,32 @@ namespace Smidgenomics.Unity.Snippets.Editor
 					_props[i] = serializedObject.FindProperty(fnames[i]);
 				}
 			}
+
+			string[] efnames = GetEventFields();
+
+			if(efnames != null)
+			{
+				//var tnames = efnames.Select(x => (string.Empty, x)).ToArray();
+				_eventTabs = new TabbedEvents(serializedObject, efnames);
+			}
+
+			SerializedProperty listProp = serializedObject.FindProperty(GetListField());
+
+			if(listProp != null)
+			{
+				_plist = new PropList(listProp);
+			}
+
 			OnInit();
+		}
+
+		private void DrawDefaultProps()
+		{
+			if(_props == null) { return; }
+			foreach (SerializedProperty p in _props)
+			{
+				p.PropertyField();
+			}
 		}
 
 		private void DisplayMessage()

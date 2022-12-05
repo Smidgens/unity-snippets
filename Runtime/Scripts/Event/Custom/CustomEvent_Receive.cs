@@ -40,7 +40,7 @@ namespace Smidgenomics.Unity.Snippets.Editor
 			nameof(CustomEvent_Receive._onEvent),
 		};
 
-		protected override string[] GetFieldNames() => _FNAMES;
+		protected override string[] GetFields() => _FNAMES;
 	}
 }
 

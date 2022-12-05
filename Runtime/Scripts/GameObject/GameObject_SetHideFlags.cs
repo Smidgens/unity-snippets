@@ -5,6 +5,7 @@ namespace Smidgenomics.Unity.Snippets
 	using UnityEngine;
 
 	[AddComponentMenu(Constants.ACM.GAMEOBJECT + "Set Hide Flags")]
+	[UnityDocumentation("Object-hideFlags")]
 	internal class GameObject_SetHideFlags : MonoBehaviour
 	{
 		public int Flags
@@ -33,7 +34,7 @@ namespace Smidgenomics.Unity.Snippets.Editor
 			nameof(GameObject_SetHideFlags._flags)
 		};
 
-		protected override string[] GetFieldNames() => _FNAMES;
+		protected override string[] GetFields() => _FNAMES;
 	}
 }
 

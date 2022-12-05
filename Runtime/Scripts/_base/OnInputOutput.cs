@@ -5,8 +5,8 @@ namespace Smidgenomics.Unity.Snippets
 
 	internal abstract class OnInputOutput<TIn, TOut> : MonoBehaviour
 	{
-		public void Input(TIn v) => _onOutput.Invoke(Compute(v));
-		protected abstract TOut Compute(in TIn v);
+		public void Input(TIn v) => _onOutput.Invoke(In(v));
+		protected abstract TOut In(in TIn v);
 
 		[SerializeField] internal UnityEvent<TOut> _onOutput = null;
 	}

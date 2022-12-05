@@ -4,7 +4,8 @@ namespace Smidgenomics.Unity.Snippets
 {
 	using UnityEngine;
 
-	[AddComponentMenu(Constants.ACM.ROOT + "Editor/Editor : Free Rotation Handle")]
+	//[AddComponentMenu(Constants.ACM.ROOT + "Editor/Editor : Free Rotation Handle")]
+	[AddComponentMenu("")]
 	internal class Editor_Handle_Rotate_Free : MonoBehaviour
 	{
 		[Min(0f)]

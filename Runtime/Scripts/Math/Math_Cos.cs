@@ -7,6 +7,6 @@ namespace Smidgenomics.Unity.Snippets
 	[AddComponentMenu(Constants.ACM.MATH_UNARY + "Cos")]
 	internal class Math_Cos : OnInputOutput<float,float>
 	{
-		protected override float Compute(in float v) => Mathf.Cos(v);
+		protected override float In(in float v) => Mathf.Cos(v);
 	}
 }

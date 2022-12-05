@@ -6,6 +6,7 @@ namespace Smidgenomics.Unity.Snippets
 	using UnityEngine.Events;
 
 	[AddComponentMenu(Constants.ACM.GAMEOBJECT + "Instantiate")]
+	[UnityDocumentation("Object.Instantiate")]
 	internal class GameObject_Instantiate : MonoBehaviour
 	{
 		public GameObject Object { get => _object; set => _object = value; }
@@ -45,7 +46,7 @@ namespace Smidgenomics.Unity.Snippets.Editor
 			nameof(GameObject_Instantiate._onOutput),
 		};
 
-		protected override string[] GetFieldNames() => _FNAMES;
+		protected override string[] GetFields() => _FNAMES;
 	}
 }
 

@@ -8,6 +8,6 @@ namespace Smidgenomics.Unity.Snippets
 	internal class Linear_Decibels : OnInputOutput<float,float>
 	{
 		public void Compute(float v) => _onOutput.Invoke(AudioMath.LinearToDecibels(v));
-		protected override float Compute(in float v) => AudioMath.LinearToDecibels(v);
+		protected override float In(in float v) => AudioMath.LinearToDecibels(v);
 	}
 }

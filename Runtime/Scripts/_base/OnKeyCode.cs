@@ -5,7 +5,7 @@ namespace Smidgenomics.Unity.Snippets
 	using UnityEngine;
 	using UnityEngine.Events;
 
-	internal abstract class OnKeyCode : MonoBehaviour
+	internal abstract class OnKeyCode : Snippet
 	{
 		public void In()
 		{
@@ -15,32 +15,11 @@ namespace Smidgenomics.Unity.Snippets
 
 		protected abstract bool Get(KeyCode key);
 
-		[SerializeField] internal KeyCode _key = KeyCode.None;
-		[SerializeField] internal UnityEvent _out = null;
+		[SerializeField] protected KeyCode _key = KeyCode.None;
+		[Space]
+		[SerializeField] protected UnityEvent _out = null;
 
 		private void Invoke() => _out.Invoke();
 
 	}
 }
-
-#if UNITY_EDITOR
-
-namespace Smidgenomics.Unity.Snippets.Editor
-{
-	using UnityEditor;
-
-	[CanEditMultipleObjects]
-	[CustomEditor(typeof(OnKeyCode), true)]
-	internal sealed class _Input_KeyCode : __BasicEditor
-	{
-		private static readonly string[] _FNAMES =
-		{
-			nameof(OnKeyCode._key),
-			null,
-			nameof(OnKeyCode._out),
-		};
-
-		protected override string[] GetFields() => _FNAMES;
-	}
-}
-#endif

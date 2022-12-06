@@ -6,7 +6,7 @@ namespace Smidgenomics.Unity.Snippets
 
 	[AddComponentMenu(Constants.ACM.VALUE_TIME + "Delta Time")]
 	[UnityDocumentation("Time-deltaTime")]
-	internal class Time_DeltaTime : OnOutput<float>
+	internal sealed class Time_DeltaTime : OnOutput<float>
 	{
 		protected override float Get() => Time.deltaTime;
 	}

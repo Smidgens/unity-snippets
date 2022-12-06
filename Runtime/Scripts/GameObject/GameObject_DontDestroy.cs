@@ -7,26 +7,8 @@ namespace Smidgenomics.Unity.Snippets
 	[DisallowMultipleComponent]
 	[AddComponentMenu(Constants.ACM.GAMEOBJECT + "Don't Destroy")]
 	[UnityDocumentation("Object.DontDestroyOnLoad")]
-	internal class GameObject_DontDestroy : MonoBehaviour
+	internal sealed class GameObject_DontDestroy : Snippet
 	{
 		private void Awake() => DontDestroyOnLoad(gameObject);
 	}
 }
-
-#if UNITY_EDITOR
-
-namespace Smidgenomics.Unity.Snippets.Editor
-{
-	using UnityEditor;
-
-	[CanEditMultipleObjects]
-	[CustomEditor(typeof(GameObject_DontDestroy))]
-	internal class _DontDestroyOnLoad : __BasicEditor
-	{
-		protected override string GetMessageText()
-		{
-			return "Object won't be destroyed on load.";
-		}
-	}
-}
-#endif

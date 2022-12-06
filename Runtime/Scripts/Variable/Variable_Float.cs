@@ -6,10 +6,10 @@ namespace Smidgenomics.Unity.Snippets
 	using System;
 
 	[Serializable]
-	internal sealed class WrappedFloat : WrappedValue<float, Variable_Float>
+	internal sealed class Wrapped_Float : WrappedValue<float, Variable_Float>
 	{
-		public WrappedFloat() { }
-		public WrappedFloat(float defaultValue) : base(defaultValue) { }
+		public Wrapped_Float() { }
+		public Wrapped_Float(float defaultValue) : base(defaultValue) { }
 	}
 
 	[AddComponentMenu(Constants.ACM.VARIABLE + "Float")]

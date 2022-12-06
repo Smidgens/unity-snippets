@@ -6,6 +6,8 @@ namespace Smidgenomics.Unity.Snippets
 	using System.Collections.Generic;
 	using UnityRandom = UnityEngine.Random;
 
+	// TODO: optimize algorithm
+
 	// source:
 	// https://www.youtube.com/watch?v=7WcmyxyFO7o
 	// https://github.com/SebLague/Poisson-Disc-Sampling/blob/master/Poisson%20Disc%20Sampling%20E01/PoissonDiscSampling.cs

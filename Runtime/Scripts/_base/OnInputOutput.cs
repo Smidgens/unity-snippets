@@ -1,42 +1,50 @@
+// smidgens @ github
+
 namespace Smidgenomics.Unity.Snippets
 {
 	using UnityEngine;
 	using UnityEngine.Events;
 
-	internal abstract class OnInputOutput<TIn, TOut> : MonoBehaviour
+	internal abstract class OnInputOutput<TIn, TOut> : Snippet
 	{
-		public void Input(TIn v) => _onOutput.Invoke(In(v));
-		protected abstract TOut In(in TIn v);
+		public void In(TIn v) => _out.Invoke(Get(v));
+		protected abstract TOut Get(in TIn v);
 
-		[SerializeField] internal UnityEvent<TOut> _onOutput = null;
+		[SerializeField] protected UnityEvent<TOut> _out = null;
 	}
 }
 
-
-#if UNITY_EDITOR
-
-namespace Smidgenomics.Unity.Snippets.Editor
+namespace Smidgenomics.Unity.Snippets
 {
-	using UnityEditor;
+	using UnityEngine;
+	using UnityEngine.Events;
 
-	[CanEditMultipleObjects]
-	[CustomEditor(typeof(OnInputOutput<,>), true)]
-	internal sealed class _OnInputOutput : Editor
+	internal abstract class OnInputOutput<TIn, TLeft, TOut> : Snippet
 	{
-		public override void OnInspectorGUI()
-		{
-			serializedObject.UpdateIfRequiredOrScript();
-			EditorGUILayout.Space();
-			EditorGUILayout.PropertyField(_onResult);
-			serializedObject.ApplyModifiedProperties();
-		}
+		public void In(TIn rhs) => _out.Invoke(Compute(_l, rhs));
 
-		private SerializedProperty _onResult = null;
+		protected abstract TOut Compute(in TLeft lhs, in TIn rhs);
 
-		private void OnEnable()
-		{
-			_onResult = serializedObject.FindProperty(nameof(OnInputOutput<float,float>._onOutput));
-		}
+		[SerializeField] protected TLeft _l = default;
+		[Space]
+		[SerializeField] protected UnityEvent<TOut> _out = null;
 	}
 }
-#endif
+
+
+namespace Smidgenomics.Unity.Snippets
+{
+	using UnityEngine;
+	using UnityEngine.Events;
+
+	internal abstract class MathOperator : Snippet
+	{
+		public void In(float rhs) => _out.Invoke(Compute(rhs));
+
+		protected abstract float Compute(in float rhs);
+
+		[SerializeField] protected Wrapped_Float _LHS = default;
+		[Space]
+		[SerializeField] protected UnityEvent<float> _out = null;
+	}
+}

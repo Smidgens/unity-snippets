@@ -6,7 +6,7 @@ namespace Smidgenomics.Unity.Snippets
 
 	[AddComponentMenu(Constants.ACM.GAMEOBJECT + "Set Hide Flags")]
 	[UnityDocumentation("Object-hideFlags")]
-	internal class GameObject_SetHideFlags : MonoBehaviour
+	internal sealed class GameObject_SetHideFlags : Snippet
 	{
 		public int Flags
 		{
@@ -14,28 +14,8 @@ namespace Smidgenomics.Unity.Snippets
 			set => _flags = (HideFlags)value;
 		}
 
-		public void Invoke() => gameObject.hideFlags = _flags;
+		public void In(GameObject go) => go.hideFlags = _flags;
 
-		[SerializeField] internal HideFlags _flags = HideFlags.None;
+		[SerializeField] private HideFlags _flags = HideFlags.None;
 	}
 }
-
-#if UNITY_EDITOR
-
-namespace Smidgenomics.Unity.Snippets.Editor
-{
-	using UnityEditor;
-
-	[CustomEditor(typeof(GameObject_SetHideFlags))]
-	internal sealed class _GameObject_SetHideFlags : __BasicEditor
-	{
-		private static readonly string[] _FNAMES =
-		{
-			nameof(GameObject_SetHideFlags._flags)
-		};
-
-		protected override string[] GetFields() => _FNAMES;
-	}
-}
-
-#endif

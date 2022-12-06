@@ -5,6 +5,7 @@ namespace Smidgenomics.Unity.Snippets
 	using System;
 	using UnityEngine;
 
+	// wrapper around skinned mesh renderer and shape key
 	[Serializable]
 	internal struct BlendShapeReference
 	{
@@ -35,8 +36,15 @@ namespace Smidgenomics.Unity.Snippets.Editor
 	[CustomPropertyDrawer(typeof(BlendShapeReference))]
 	internal sealed class _BlendShapeReference : PropertyDrawer
 	{
+
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
+			Vector3 center = position.center;
+
+			position.height = EditorGUIUtility.singleLineHeight;
+			position.center = center;
+
+
 			Rect lRect, pRect;
 			{
 				Vector2 lSize = EditorStyles.label.CalcSize(label);
@@ -64,18 +72,12 @@ namespace Smidgenomics.Unity.Snippets.Editor
 		{
 			var indexProp = property.FindPropertyRelative(nameof(BlendShapeReference._index));
 			var rendererProp = property.FindPropertyRelative(nameof(BlendShapeReference._renderer));
-			Rect l, r;
-			{
-				l = area;
-				l.width *= 0.5f;
-				r = l;
-				r.x += l.width;
 
-			}
-			l.width -= 2;
+			Rect left = area.SliceLeft(area.width * 0.5f); // left col
+			area.SliceLeft(2f); // spacing
 
-			EditorGUI.PropertyField(l, rendererProp, GUIContent.none);
-			DrawIndexDrawer(r, rendererProp, indexProp);
+			EditorGUI.PropertyField(left, rendererProp, GUIContent.none);
+			DrawIndexDrawer(area, rendererProp, indexProp);
 		}
 
 		private static void DrawIndexDrawer(Rect area, SerializedProperty rendererProp, SerializedProperty indexProp)

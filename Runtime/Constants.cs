@@ -26,6 +26,14 @@ namespace Smidgenomics.Unity.Snippets
 			nameof(Smidgenomics) + "/"
 			+ nameof(Snippets) + "/";
 
+			private static class Prefix
+			{
+				public const string MATH = ROOT + "Math/";
+			}
+
+			public const string SCENE = ROOT + "Scene/Scene : ";
+			public const string APPLICATION = ROOT + "Application/Application : ";
+
 			public const string
 			VARIABLE = ROOT + "Variable/Variable : ";
 
@@ -93,13 +101,13 @@ namespace Smidgenomics.Unity.Snippets
 			ASSETBUNDLE = ROOT + "Assets/Asset Bundle/Asset Bundle : ",
 			ASSETS = ROOT + "Assets/";
 
-			// flow scripts
+			// math
 			public const string
-			MATH_AUDIO = ROOT + "Math/Audio/Math : ",
-			MATH_UNARY = ROOT + "Math/Unary/Math : ",
+			MATH_FUNCTION = Prefix.MATH + "Function/Math : ",
+			MATH_OPERATOR = Prefix.MATH + "Operator/Math : ",
 			MATH = ROOT + "Math/";
 
-			// flow scripts
+			// flow
 			public const string
 			FLOW_TIMING = ROOT + "Flow/Timing/Timing : ",
 			FLOW_CONDITIONAL = ROOT + "Flow/Conditional/Conditional : ",
@@ -107,9 +115,14 @@ namespace Smidgenomics.Unity.Snippets
 			FLOW_CONTROL = ROOT + "Flow/Control/Control : ",
 			FLOW = ROOT + "Flow/Flow : ";
 
-			// user store
+			// player
 			public const string
-			STORAGE_PREFS = ROOT + "Storage/Player Prefs/";
+			PLAYER_PREFS = ROOT + "Player/Player Prefs/Player Prefs : ",
+			PLAYER_PREFS_VALUE = ROOT + "Player/Player Prefs/Value/";
+			public const string
+			PLAYER_PREFS_STRING = ROOT + "Player/Player Prefs/Value/String/Player Prefs : ",
+			PLAYER_PREFS_INT = ROOT + "Player/Player Prefs/Value/Int/Player Prefs : ",
+			PLAYER_PREFS_FLOAT = ROOT + "Player/Player Prefs/Value/Float/Player Prefs : ";
 
 		}
 	}

@@ -8,14 +8,18 @@ namespace Smidgenomics.Unity.Snippets
 	/// Draws gizmo cube in editor
 	/// </summary>
 	[AddComponentMenu(Constants.ACM.DEBUG_GIZMO + "Cube")]
-	[UnityDocumentation("Gizmos")]
-	internal sealed class Gizmo_Cube : Gizmos_Draw
+	[UnityDocumentation("Gizmos.DrawCube")]
+	internal class Gizmo_Cube : Gizmo
 	{
-		protected override void DrawSolid() => Draw(Gizmos.DrawCube);
 
-		protected override void DrawWire() => Draw(Gizmos.DrawWireCube);
+		protected delegate void DrawFn(Vector3 pos, Vector3 size);
 
-		private void Draw(System.Action<Vector3, Vector3> drawFn) => drawFn.Invoke(transform.position, GetScaledSize());
+		protected override sealed void OnDraw()
+		{
+			Gizmos.DrawCube(GetPosition(), GetScaledSize());
+		}
+
+		protected virtual DrawFn GetDrawFn() => Gizmos.DrawCube;
 
 		private Vector3 GetScaledSize()
 		{
@@ -26,32 +30,10 @@ namespace Smidgenomics.Unity.Snippets
 			return size;
 		}
 
-#if UNITY_EDITOR
-		[SerializeField] internal Vector3 _size = Vector3.one; // box size
+		#if UNITY_EDITOR
+		[SerializeField] private Vector3 _size = Vector3.one; // box size
+		
 #endif
 
 	}
 }
-
-#if UNITY_EDITOR
-
-namespace Smidgenomics.Unity.Snippets.Editor
-{
-	using UnityEditor;
-
-	[CanEditMultipleObjects]
-	[CustomEditor(typeof(Gizmo_Cube))]
-	internal sealed class _Gizmo_Cube : __BasicEditor
-	{
-		private static readonly string[] _FNAMES =
-		{
-			nameof(Gizmos_Draw._color),
-			nameof(Gizmos_Draw._wire),
-			null,
-			nameof(Gizmo_Cube._size),
-		};
-		protected override string[] GetFields() => _FNAMES;
-	}
-}
-
-#endif

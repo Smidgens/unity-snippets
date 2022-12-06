@@ -7,7 +7,8 @@ namespace Smidgenomics.Unity.Snippets
 	using UnityEngine.Events;
 
 	[AddComponentMenu(Constants.ACM.FLOW_TIMING + "Transition")]
-	internal class Transition : MonoBehaviour
+	[DrawEventsAsTabs]
+	internal sealed class Transition : Snippet
 	{
 		// invoke default
 		public void In() => StartLerp(_duration);
@@ -20,10 +21,10 @@ namespace Smidgenomics.Unity.Snippets
 			_abort.Invoke();
 		}
 
-		[SerializeField] internal WrappedFloat _duration = new WrappedFloat(2f);
-		[SerializeField] internal UnityEvent<float> _tick = null;
-		[SerializeField] internal UnityEvent _out = null;
-		[SerializeField] internal UnityEvent _abort = null;
+		[SerializeField] private Wrapped_Float _duration = new Wrapped_Float(2f);
+		[SerializeField] private UnityEvent<float> _tick = null;
+		[SerializeField] private UnityEvent _out = null;
+		[SerializeField] private UnityEvent _abort = null;
 
 		private int _activeFading = 0;
 
@@ -55,32 +56,3 @@ namespace Smidgenomics.Unity.Snippets
 		}
 	}
 }
-
-#if UNITY_EDITOR
-
-namespace Smidgenomics.Unity.Snippets.Editor
-{
-	using UnityEditor;
-
-	[CanEditMultipleObjects]
-	[CustomEditor(typeof(Transition))]
-	internal sealed class _Transition : __BasicEditor
-	{
-		protected override string[] GetFields() => _FNAMES;
-		protected override string[] GetEventFields() => _TABS;
-
-		private static readonly string[] _FNAMES =
-		{
-			nameof(Transition._duration)
-		};
-
-		private static readonly string[] _TABS =
-		{
-			nameof(Transition._tick),
-			nameof(Transition._out),
-			nameof(Transition._abort),
-		};
-
-	}
-}
-#endif

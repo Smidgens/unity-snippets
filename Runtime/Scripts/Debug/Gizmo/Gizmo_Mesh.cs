@@ -4,76 +4,52 @@ namespace Smidgenomics.Unity.Snippets
 {
 	using UnityEngine;
 
-	/// <summary>
-	/// Draws gizmo cube in editor
-	/// </summary>
 	[AddComponentMenu(Constants.ACM.DEBUG_GIZMO + "Mesh")]
-	[UnityDocumentation("Gizmos")]
-	internal sealed class Gizmo_Mesh : Gizmos_Draw
+	[UnityDocumentation("Gizmos.DrawMesh")]
+	internal class Gizmo_Mesh : Gizmo
 	{
-		protected override void DrawSolid()
-		{
-			Draw(Gizmos.DrawMesh);
-		}
+		protected delegate void DrawFn
+		(
+			Mesh mesh,
+			int submeshIndex,
+			Vector3 pos,
+			Quaternion rot,
+			Vector3 scale
+		);
 
-		protected override void DrawWire()
-		{
-			Draw(Gizmos.DrawWireMesh);
-		}
+		protected override sealed void OnDraw() => Draw(GetDrawFn());
 
-		private void Draw(System.Action<Mesh, int, Vector3, Quaternion, Vector3> drawFn)
+		protected virtual DrawFn GetDrawFn() => Gizmos.DrawMesh;
+
+		private void Draw(DrawFn drawFn)
 		{
 			if (!_mesh) { return; }
+			if (_mesh.subMeshCount == 0) { return; }
 
 			Vector3 scale = transform.lossyScale;
-			Vector3 position = transform.position;
-			Quaternion rotation = transform.rotation;
+			Vector3 position = GetPosition();
+			Quaternion rotation = transform.rotation * Quaternion.Euler(_rotation);
 
-			if (!_allSubmeshes)
+			bool drawAllSubmeshes = _submesh < 0 || _submesh >= _mesh.subMeshCount;
+
+			if (drawAllSubmeshes)
 			{
-				if(_submesh < 0 || _submesh >= _mesh.subMeshCount) { return; }
-				drawFn.Invoke(_mesh, _submesh, position, rotation, scale);
+				for (int i = 0; i < _mesh.subMeshCount; i++)
+				{
+					drawFn.Invoke(_mesh, i, position, rotation, scale);
+				}
+				return;
 			}
 
-			for (int i = 0; i < _mesh.subMeshCount; i++)
-			{
-				drawFn.Invoke(_mesh, i, position, rotation, scale);
-			}
+			if (_submesh < 0 || _submesh >= _mesh.subMeshCount) { return; }
+			drawFn.Invoke(_mesh, _submesh, position, rotation, scale);
 		}
 
-#if UNITY_EDITOR
+		#if UNITY_EDITOR
+		[SerializeField] internal Vector3 _rotation = default;
 		[SerializeField] internal Mesh _mesh = default;
-		[SerializeField] internal bool _allSubmeshes = true;
-
-		[Min(0)]
-		[SerializeField] internal int _submesh = 0;
-
-#endif
+		[SerializeField] internal int _submesh = -1;
+		#endif
 
 	}
 }
-
-#if UNITY_EDITOR
-
-namespace Smidgenomics.Unity.Snippets.Editor
-{
-	using UnityEditor;
-
-	[CanEditMultipleObjects]
-	[CustomEditor(typeof(Gizmo_Mesh))]
-	internal sealed class _Gizmo_Mesh : __BasicEditor
-	{
-		private static readonly string[] _FNAMES =
-		{
-			nameof(Gizmos_Draw._color),
-			nameof(Gizmos_Draw._wire),
-			null,
-			nameof(Gizmo_Mesh._mesh),
-			nameof(Gizmo_Mesh._allSubmeshes),
-			nameof(Gizmo_Mesh._submesh),
-		};
-		protected override string[] GetFields() => _FNAMES;
-	}
-}
-
-#endif

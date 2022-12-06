@@ -4,50 +4,36 @@ namespace Smidgenomics.Unity.Snippets
 {
 	using UnityEngine;
 	using UnityEngine.Events;
+	using System.Collections.Generic;
 
 	/// <summary>
 	/// Base class for looping through values
 	/// </summary>
-	internal abstract class ForEach<T> : MonoBehaviour
+	internal abstract class ForEach<T> : Snippet
 	{
-		public void Invoke(T[] arr)
+		// array specific iteration
+		public void In(T[] arr)
 		{
-			// why bother if empty
-			if(_onEach.GetPersistentEventCount() == 0) { return; }
-
-			for (int i = 0; i < arr.Length; i++)
-			{
-				_onEach.Invoke(arr[i]);
-			}
+			if(!HasOutputs()) { return; }
+			for (int i = 0; i < arr.Length; i++) { _onEach.Invoke(arr[i]); }
 		}
 
-		[SerializeField] internal UnityEvent<T> _onEach = null;
+		// expose some reasonably common collection types for inspector
+		public void In(List<T> l) => In2(l);
+		public void In(LinkedList<T> l) => In2(l);
+		public void In(IEnumerable<T> l) => In2(l);
+
+		[SerializeField] protected UnityEvent<T> _onEach = null;
+
+		// output handlers > 0
+		private bool HasOutputs() => _onEach.GetPersistentEventCount() > 0;
+
+		// generic iterator
+		private void In2(IEnumerable<T> collection)
+		{
+			if (!HasOutputs()) { return; }
+			foreach (T item in collection) { _onEach.Invoke(item); }
+		}
+
 	}
 }
-
-#if UNITY_EDITOR
-
-namespace Smidgenomics.Unity.Snippets.Editor
-{
-	using UnityEditor;
-
-	[CanEditMultipleObjects]
-	[CustomEditor(typeof(ForEach<>), true)]
-	internal sealed class _ForEach : Editor
-	{
-		public override void OnInspectorGUI()
-		{
-			EditorGUILayout.Space();
-			EditorGUILayout.PropertyField(_onEach);
-			serializedObject.ApplyModifiedProperties();
-		}
-
-		private SerializedProperty _onEach = null;
-
-		private void OnEnable()
-		{
-			_onEach = serializedObject.FindProperty(nameof(ForEach<int>._onEach));
-		}
-	}
-}
-#endif

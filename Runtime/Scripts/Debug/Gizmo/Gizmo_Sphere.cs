@@ -4,49 +4,25 @@ namespace Smidgenomics.Unity.Snippets
 {
 	using UnityEngine;
 
-	/// <summary>
-	/// Draws gizmo cube in editor
-	/// </summary>
 	[AddComponentMenu(Constants.ACM.DEBUG_GIZMO + "Sphere")]
-	[UnityDocumentation("Gizmos")]
-	internal sealed class Gizmo_Sphere : Gizmos_Draw
+	[UnityDocumentation("Gizmos.DrawSphere")]
+	internal class Gizmo_Sphere : Gizmo
 	{
-		protected override void DrawSolid() => Draw(Gizmos.DrawSphere);
-
-		protected override void DrawWire() => Draw(Gizmos.DrawWireSphere);
-
-		private void Draw(System.Action<Vector3, float> drawFn) => drawFn.Invoke(transform.position, GetScaledRadius());
-
-		private float GetScaledRadius() => _radius * transform.lossyScale.x;
-
-#if UNITY_EDITOR
-		[Min(0f)]
-		[SerializeField] internal float _radius = 0.5f; // circumference of mathy math
-#endif
-
-	}
-}
-
-
-#if UNITY_EDITOR
-
-namespace Smidgenomics.Unity.Snippets.Editor
-{
-	using UnityEditor;
-
-	[CanEditMultipleObjects]
-	[CustomEditor(typeof(Gizmo_Sphere))]
-	internal sealed class _Gizmos_Draw : __BasicEditor
-	{
-		private static readonly string[] _FNAMES =
+		protected override sealed void OnDraw()
 		{
-			nameof(Gizmos_Draw._color),
-			nameof(Gizmos_Draw._wire),
-			null,
-			nameof(Gizmo_Sphere._radius),
-		};
-		protected override string[] GetFields() => _FNAMES;
+			Gizmos.DrawSphere(GetPosition(), GetScaledRadius());
+		}
+
+		protected virtual System.Action<Vector3,float> GetDrawFn()
+		{
+			return Gizmos.DrawSphere;
+		}
+
+		private float GetScaledRadius() => transform.lossyScale.x * _radius;
+
+		#if UNITY_EDITOR
+		[SerializeField] internal float _radius = 0.5f;
+		#endif
+
 	}
 }
-
-#endif

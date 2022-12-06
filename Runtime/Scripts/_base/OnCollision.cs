@@ -6,7 +6,7 @@ namespace Smidgenomics.Unity.Snippets
 	using UnityEngine.Events;
 
 	[RequireComponent(typeof(Collider))]
-	internal abstract class OnCollisionEvent : MonoBehaviour
+	internal abstract class OnCollisionEvent : Snippet
 	{
 		protected void Invoke(Collision c)
 		{
@@ -14,8 +14,9 @@ namespace Smidgenomics.Unity.Snippets
 			_out.Invoke(c);
 		}
 
-		[SerializeField] internal UnityEvent<Collision> _out = null;
-		[SerializeField] internal LayerMask _layers = -1;
+		[SerializeField] protected LayerMask _layers = -1;
+		[Space]
+		[SerializeField] protected UnityEvent<Collision> _out = null;
 
 		private bool ShouldIgnore(Collider c)
 		{
@@ -24,27 +25,3 @@ namespace Smidgenomics.Unity.Snippets
 		}
 	}
 }
-
-#if UNITY_EDITOR
-
-namespace Smidgenomics.Unity.Snippets.Editor
-{
-	using UnityEngine;
-	using UnityEditor;
-
-	[CanEditMultipleObjects]
-	[CustomEditor(typeof(OnCollisionEvent), true)]
-	internal sealed class _OnCollisionEvent : __BasicEditor
-	{
-		private static readonly string[] _FNAMES =
-		{
-			nameof(OnCollisionEvent._layers),
-			null,
-			nameof(OnCollisionEvent._out),
-		};
-
-		protected override string[] GetFields() => _FNAMES;
-	}
-}
-
-#endif

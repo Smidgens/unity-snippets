@@ -7,47 +7,42 @@ namespace Smidgenomics.Unity.Snippets
 
 	[AddComponentMenu(Constants.ACM.GAMEOBJECT + "Instantiate")]
 	[UnityDocumentation("Object.Instantiate")]
-	internal class GameObject_Instantiate : MonoBehaviour
+	internal sealed class GameObject_Instantiate : Snippet
 	{
-		public GameObject Object { get => _object; set => _object = value; }
-		public Transform Parent { get => _parent; set => _parent = value; }
-
-		public void Invoke()
+		public void In()
 		{
-			if (!_object) { return; }
-			_onOutput.Invoke(Instantiate());
+			GameObject prefab = _object?.GetValue();
+			if (!prefab) { return; }
+			GameObject go = Spawn(prefab);
+			_out.Invoke(go);
 		}
 
-		[SerializeField] internal GameObject _object = default;
-		[SerializeField] internal Transform _parent = default;
-		[SerializeField] internal UnityEvent<GameObject> _onOutput = default;
-
-		private GameObject Instantiate() => Instantiate(_object, _parent);
-
-	}
-}
-
-
-#if UNITY_EDITOR
-
-namespace Smidgenomics.Unity.Snippets.Editor
-{
-	using UnityEditor;
-
-	[CustomEditor(typeof(GameObject_Instantiate))]
-	[CanEditMultipleObjects]
-	internal sealed class _GameObject_Instantiate : __BasicEditor
-	{
-		private static readonly string[] _FNAMES =
+		public void In(Vector3 pos)
 		{
-			nameof(GameObject_Instantiate._object),
-			nameof(GameObject_Instantiate._parent),
-			null,
-			nameof(GameObject_Instantiate._onOutput),
-		};
+			GameObject prefab = _object?.GetValue();
+			if (!prefab) { return; }
+			GameObject go = Spawn(prefab);
+			go.transform.localPosition = pos;
+			go.SetActive(_initialState);
+			_out.Invoke(go);
+		}
 
-		protected override string[] GetFields() => _FNAMES;
+		[SerializeField] private Wrapped_GameObject _object = default;
+		[SerializeField] private Wrapped_GameObject _parent = default;
+		[SerializeField] private Wrapped_Bool _initialState = new Wrapped_Bool(true);
+
+		[Space]
+		[SerializeField] private UnityEvent<GameObject> _out = default;
+
+		private GameObject Spawn(GameObject go)
+		{
+			GameObject parent = _parent?.GetValue();
+			if (!parent)
+			{
+				return Instantiate(go);
+			}
+			return Instantiate(go, parent.transform);
+		}
+
 	}
 }
-
-#endif

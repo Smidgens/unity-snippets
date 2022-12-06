@@ -9,7 +9,7 @@ namespace Smidgenomics.Unity.Snippets
 	/// </summary>
 	[AddComponentMenu(Constants.ACM.DEBUG_PRINT + "Console")]
 	[UnityDocumentation("Debug.Log")]
-	internal sealed class Print_Console : MonoBehaviour
+	internal sealed class Print_Console : Snippet
 	{
 		public void Log(object v) => Log<object>(v);
 		public void Log(string v) => Log<string>(v);
@@ -24,21 +24,3 @@ namespace Smidgenomics.Unity.Snippets
 		private static void Log<T>(in T v) => print(v);
 	}
 }
-
-#if UNITY_EDITOR
-
-namespace Smidgenomics.Unity.Snippets.Editor
-{
-	using UnityEditor;
-
-	[CanEditMultipleObjects]
-	[CustomEditor(typeof(Print_Console))]
-	internal sealed class _Print : __BasicEditor
-	{
-		//protected override string GetMessageText()
-		//{
-		//	return "Logs debug text";
-		//}
-	}
-}
-#endif

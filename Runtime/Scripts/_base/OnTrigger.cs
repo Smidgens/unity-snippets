@@ -11,11 +11,12 @@ namespace Smidgenomics.Unity.Snippets
 		protected void Invoke(Collider c)
 		{
 			if (ShouldIgnore(c)) { return; }
-			_onEvent.Invoke(c);
+			_out.Invoke(c);
 		}
 
-		[SerializeField] internal UnityEvent<Collider> _onEvent = null;
-		[SerializeField] internal LayerMask _layers = -1;
+		[SerializeField] private LayerMask _layers = -1;
+		[Space]
+		[SerializeField] private UnityEvent<Collider> _out = null;
 
 		private bool ShouldIgnore(Collider c)
 		{
@@ -34,28 +35,13 @@ namespace Smidgenomics.Unity.Snippets.Editor
 
 	[CanEditMultipleObjects]
 	[CustomEditor(typeof(OnTrigger), true)]
-	internal sealed class _OnTrigger : __BasicEditor
+	internal sealed class _OnTrigger : __Inspector
 	{
-		private const string _TRIGGER_WARNING = "'Is Trigger' property on Collider needs to be enabled for Trigger to work.";
-
-		private static readonly string[] _FNAMES =
-		{
-			nameof(OnTrigger._layers),
-			null,
-			nameof(OnTrigger._onEvent),
-		};
-
-		protected override string[] GetFields() => _FNAMES;
-
-		protected override MessageType GetMessageType() => MessageType.Warning;
-		protected override string GetMessageText() => !_collider.isTrigger ? _TRIGGER_WARNING : null;
-
+		private static readonly string _TRIGGER_WARNING = "- Collider is not a Trigger -".ToUpper();
 		private Collider _collider = null;
 
-		protected override void OnInit()
-		{
-			_collider = ((MonoBehaviour)target).GetComponent<Collider>();
-		}
+		protected override string GetWarning() => !_collider.isTrigger ? _TRIGGER_WARNING : null;
+		protected override void OnAfterEnable() => _collider = ((MonoBehaviour)target).GetComponent<Collider>();
 	}
 }
 

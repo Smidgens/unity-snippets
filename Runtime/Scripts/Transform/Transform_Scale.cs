@@ -5,8 +5,13 @@ namespace Smidgenomics.Unity.Snippets
 	using UnityEngine;
 
 	[AddComponentMenu(Constants.ACM.TRANSFORM + "Scale")]
-	internal class Transform_Scale : MonoBehaviour
+	internal sealed class Transform_Scale : Snippet
 	{
+		public void In(float scale)
+		{
+			transform.localScale = Vector3.one * scale;
+		}
+
 		public void Tick(Vector3 scale)
 		{
 			Vector3 newScale = transform.localScale;
@@ -17,21 +22,3 @@ namespace Smidgenomics.Unity.Snippets
 		}
 	}
 }
-
-
-#if UNITY_EDITOR
-namespace Smidgenomics.Unity.Snippets.Editor
-{
-	using UnityEditor;
-	[CanEditMultipleObjects]
-	[CustomEditor(typeof(Transform_Scale))]
-	internal class _Transform_Scale : Editor
-	{
-		public override void OnInspectorGUI()
-		{
-			EditorGUILayout.Space();
-			EditorGUILayout.HelpBox("Invoked through Tick method", MessageType.Info);
-		}
-	}
-}
-#endif

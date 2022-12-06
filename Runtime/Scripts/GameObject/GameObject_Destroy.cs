@@ -6,7 +6,7 @@ namespace Smidgenomics.Unity.Snippets
 
 	[AddComponentMenu(Constants.ACM.GAMEOBJECT + "Destroy")]
 	[UnityDocumentation("Object.Destroy")]
-	internal class GameObject_Destroy : MonoBehaviour
+	internal sealed class GameObject_Destroy : Snippet
 	{
 		public GameObject Object { get => _object; set => _object = value; }
 
@@ -15,29 +15,6 @@ namespace Smidgenomics.Unity.Snippets
 			if (!_object) { return; }
 			Destroy(_object);
 		}
-		[SerializeField] internal GameObject _object = default;
+		[SerializeField] private GameObject _object = default;
 	}
 }
-
-
-#if UNITY_EDITOR
-
-namespace Smidgenomics.Unity.Snippets.Editor
-{
-	using UnityEditor;
-
-	[CustomEditor(typeof(GameObject_Destroy))]
-	[CanEditMultipleObjects]
-	internal sealed class _GameObject_Destroy : __BasicEditor
-	{
-		private static readonly string[] _FNAMES =
-		{
-			nameof(GameObject_Instantiate._object),
-			nameof(GameObject_Instantiate._parent),
-		};
-
-		protected override string[] GetFields() => _FNAMES;
-	}
-}
-
-#endif

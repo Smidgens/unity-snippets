@@ -76,7 +76,7 @@ namespace Smidgenomics.Unity.Snippets.Editor
 			fields = new List<SerializedProperty>();
 
 			// show events in tabs?
-			bool eventsAsTabs = type.GetCustomAttribute<DrawEventsAsTabsAttribute>() != null;
+			bool eventsAsTabs = type.GetCustomAttribute<TabbedEventsAttribute>() != null;
 			eventFields = eventsAsTabs
 			? new List<SerializedProperty>()
 			: null;

@@ -20,14 +20,7 @@ namespace Smidgenomics.Unity.Snippets.Editor
 
 			for (int i = 0; i < fields.Count; i++)
 			{
-				Debug.Log(fields[i]?.name);
 				SerializedProperty eventProp = fields[i];
-
-				if(eventProp == null)
-				{
-					
-				}
-
 				SerializedProperty eventCalls = eventProp.FindEventCallers();
 
 				ItemInfo nItem = new ItemInfo

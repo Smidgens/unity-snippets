@@ -7,11 +7,13 @@ namespace Smidgenomics.Unity.Snippets
 	using System.Collections;
 
 	[AddComponentMenu(Constants.ACM.FLOW_TIMING + "Wait")]
+	[UnityDocumentation("WaitForSeconds")]
 	internal sealed class Wait : Snippet
 	{
 		// invoke outside delay
-		public void In(float delay)
+		public void Enter()
 		{
+			float delay = _duration.GetValue();
 			if (delay < 0) { return; }
 			StartCoroutine(WaitRoutine(delay, Out));
 		}
@@ -19,11 +21,15 @@ namespace Smidgenomics.Unity.Snippets
 		// abort active delay(s)
 		public void Abort() => StopAllCoroutines();
 
+		// wait duration
+		[SerializeField] private Wrapped_Float _duration = new Wrapped_Float(1f);
+
 		// post-delay handlers
-		[SerializeField] private UnityEvent _out = null;
+		[Space]
+		[SerializeField] private UnityEvent _exit = null;
 
 		// invoke output
-		private void Out() => _out.Invoke();
+		private void Out() => _exit.Invoke();
 
 		private static IEnumerator WaitRoutine(float t, System.Action doneFn)
 		{

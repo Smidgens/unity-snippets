@@ -7,11 +7,11 @@ namespace Smidgenomics.Unity.Snippets
 	using UnityEngine.Events;
 
 	[AddComponentMenu(Constants.ACM.FLOW_TIMING + "Timer")]
-	[DrawEventsAsTabs]
+	[TabbedEvents]
 	internal sealed class Timer : Snippet
 	{
 		// invoke default
-		public void In() => StartLerp(_duration);
+		public void Enter() => StartTimer(_duration);
 		
 		// stop active lerp
 		public void Abort()
@@ -23,12 +23,12 @@ namespace Smidgenomics.Unity.Snippets
 
 		[SerializeField] private Wrapped_Float _duration = new Wrapped_Float(2f);
 		[SerializeField] private UnityEvent<float> _tick = null;
-		[SerializeField] private UnityEvent _out = null;
+		[SerializeField] private UnityEvent _exit = null;
 		[SerializeField] private UnityEvent _abort = null;
 
 		private int _activeFading = 0;
 
-		public void StartLerp(in float duration)
+		public void StartTimer(in float duration)
 		{
 			if(duration <= 0f) { return; }
 			if (_activeFading > 0) { return; }
@@ -52,7 +52,7 @@ namespace Smidgenomics.Unity.Snippets
 			}
 			InvokeListeners(1f);
 			_activeFading--;
-			_out.Invoke();
+			_exit.Invoke();
 		}
 	}
 }

@@ -10,7 +10,7 @@ namespace Smidgenomics.Unity.Snippets
 
 	[AddComponentMenu(Constants.ACM.ASSETBUNDLE + "Load From File Async")]
 	[UnityDocumentation("AssetBundle.LoadFromFileAsync")]
-	[DrawEventsAsTabs]
+	[TabbedEvents]
 	internal sealed class AssetBundle_LoadFromFileAsync : MonoBehaviour
 	{
 		public void In()

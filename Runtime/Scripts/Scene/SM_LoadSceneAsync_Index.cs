@@ -9,7 +9,7 @@ namespace Smidgenomics.Unity.Snippets
 
 	[AddComponentMenu(Constants.ACM.SCENE + "Load Async (index)")]
 	[UnityDocumentation("SceneManagement.SceneManager.LoadSceneAsync")]
-	[DrawEventsAsTabs]
+	[TabbedEvents]
 	internal sealed class SM_LoadSceneAsync_Index : Snippet
 	{
 		public void In()

@@ -10,7 +10,7 @@ namespace Smidgenomics.Unity.Snippets
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Class)]
 	[Conditional("UNITY_EDITOR")]
-	internal sealed class DrawEventsAsTabsAttribute : Attribute
+	internal sealed class TabbedEventsAttribute : Attribute
 	{
 	
 	}

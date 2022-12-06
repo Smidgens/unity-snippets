@@ -6,7 +6,7 @@ namespace Smidgenomics.Unity.Snippets
 	using UnityEngine;
 	using UnityEngine.Events;
 
-	[DrawEventsAsTabs]
+	[TabbedEvents]
 	internal abstract class File_Read<TOut> : Snippet
 	{
 		public void In(string path)

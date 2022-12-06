@@ -6,9 +6,9 @@ namespace Smidgenomics.Unity.Snippets
 	using UnityEngine;
 	using UnityEngine.Events;
 
-	[AddComponentMenu(Constants.ACM.FLOW_TIMING + "Transition")]
+	[AddComponentMenu(Constants.ACM.FLOW_TIMING + "Timer")]
 	[DrawEventsAsTabs]
-	internal sealed class Transition : Snippet
+	internal sealed class Timer : Snippet
 	{
 		// invoke default
 		public void In() => StartLerp(_duration);

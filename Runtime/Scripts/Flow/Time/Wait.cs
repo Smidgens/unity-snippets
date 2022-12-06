@@ -6,8 +6,8 @@ namespace Smidgenomics.Unity.Snippets
 	using UnityEngine.Events;
 	using System.Collections;
 
-	[AddComponentMenu(Constants.ACM.FLOW_TIMING + "Delay")]
-	internal sealed class Flow_Delay : Snippet
+	[AddComponentMenu(Constants.ACM.FLOW_TIMING + "Wait")]
+	internal sealed class Wait : Snippet
 	{
 		// invoke outside delay
 		public void In(float delay)

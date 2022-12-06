@@ -109,7 +109,7 @@ namespace Smidgenomics.Unity.Snippets
 
 			// flow
 			public const string
-			FLOW_TIMING = ROOT + "Flow/Timing/Timing : ",
+			FLOW_TIMING = ROOT + "Flow/Time/Timing : ",
 			FLOW_CONDITIONAL = ROOT + "Flow/Conditional/Conditional : ",
 			FOR_EACH = ROOT + "Flow/Loop/For Each : ",
 			FLOW_CONTROL = ROOT + "Flow/Control/Control : ",

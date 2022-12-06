@@ -6,13 +6,13 @@ namespace Smidgenomics.Unity.Snippets
 
 	internal static partial class Rect_
 	{
-		public static Rect SliceRight(this ref Rect r, in float w)
+		public static Rect SliceLeft(this ref Rect r, in float w)
 		{
-			Rect r2 = r;
-			r2.width = w;
+			Rect leftRect = r;
+			leftRect.width = w;
 			r.width -= w;
-			r2.x += r.width;
-			return r2;
+			r.x += w;
+			return leftRect;
 		}
 	}
 }

@@ -1,6 +1,6 @@
 {
 	"name":"com.smidgenomics.unity-snippets",
-	"version":"0.1.0",
+	"version":"0.2.0",
 	"displayName":"Snippets",
 	"description":"Modular snippet scripts for Unity",
 	"repository": {

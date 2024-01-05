@@ -45,11 +45,8 @@ namespace Smidgenomics.Unity.Snippets
 			drawFn.Invoke(_mesh, _submesh, position, rotation, scale);
 		}
 
-		#if UNITY_EDITOR
 		[SerializeField] internal Vector3 _rotation = default;
 		[SerializeField] internal Mesh _mesh = default;
 		[SerializeField] internal int _submesh = -1;
-		#endif
-
 	}
 }

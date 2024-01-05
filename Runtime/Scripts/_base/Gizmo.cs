@@ -23,9 +23,7 @@ namespace Smidgenomics.Unity.Snippets
 			return transform.TransformPoint(_offset);
 		}
 
-#if UNITY_EDITOR
 		[SerializeField] private Color _color = Color.green; // gizmo color
 		[SerializeField] protected Vector3 _offset = Vector3.zero; // box size
-#endif
 	}
 }

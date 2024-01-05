@@ -30,10 +30,7 @@ namespace Smidgenomics.Unity.Snippets
 			return size;
 		}
 
-		#if UNITY_EDITOR
 		[SerializeField] private Vector3 _size = Vector3.one; // box size
-		
-#endif
 
 	}
 }

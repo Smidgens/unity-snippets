@@ -20,9 +20,7 @@ namespace Smidgenomics.Unity.Snippets
 
 		private float GetScaledRadius() => transform.lossyScale.x * _radius;
 
-		#if UNITY_EDITOR
 		[SerializeField] internal float _radius = 0.5f;
-		#endif
 
 	}
 }

@@ -24,7 +24,6 @@ namespace Smidgenomics.Unity.Snippets
 		[Space]
 		[SerializeField] private UnityEvent<Vector2> _out = null;
 
-		[SerializeField]
 		private Vector2 GetKeys()
 		{
 			int up = Input.GetKey(_up) ? 1 : 0;
